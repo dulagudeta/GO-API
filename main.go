@@ -10,9 +10,9 @@ type book struct {
 }
 
 var books = []book{
-	{ID: "1", Title: "The Great Gatsby", Author: "F. Scott Fitzgerald", Price: 10.99},
-	{ID: "2", Title: "To Kill a Mockingbird", Author: "Harper Lee", Price: 8.99},
-	{ID: "3", Title: "1984", Author: "George Orwell", Price: 9.99},
+	{ID: "1", Title: "Fikir Eske Mekabir", Author: "Haddis Alemayehu", Price: 12.99},
+	{ID: "2", Title: "Oromay", Author: "Bealu Girma", Price: 11.50},
+	{ID: "3", Title: "Tobbya", Author: "Yismake Worku", Price: 13.75},
 }
 
 func getbooks(c *gin.Context) {
