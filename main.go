@@ -27,6 +27,7 @@ func bookByID(c *gin.Context) {
 	id := c.Param("id")
 	book, err := getbookByID(id)
 	if err != nil {
+		c.IndentedJSON(404, gin.H{"message": "book not found"})
 		return
 	}
 	c.IndentedJSON(200, book)
