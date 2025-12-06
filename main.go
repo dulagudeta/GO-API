@@ -57,12 +57,3 @@ func main() {
 	router.Run("localhost:8080")
 	//http.ListenAndServe(":8080", router)
 }
-
-/*
-You can add more routes or middleware here if needed.
-For example, to add a simple health check endpoint:
-
-router.GET("/health", func(c *gin.Context) {
-	c.JSON(200, gin.H{"status": "ok"})
-})
-*/
