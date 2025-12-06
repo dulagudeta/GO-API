@@ -107,6 +107,41 @@ func deleteBook(c *gin.Context) {
 
 	c.JSON(http.StatusNotFound, gin.H{"error": "book not found"})
 }
+// PATCH--PARTIAL UPDATE
+func patchBook(c *gin.Context) {
+	id := c.Param("id")
+
+	var patchData map[string]interface{}
+	if err := c.BindJSON(&patchData); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid JSON"})
+		return
+	}
+
+	for i, b := range books {
+		if b.ID == id {
+
+			// Update only sent fields
+			if title, ok := patchData["title"].(string); ok {
+				books[i].Title = title
+			}
+			if author, ok := patchData["author"].(string); ok {
+				books[i].Author = author
+			}
+			if price, ok := patchData["price"].(float64); ok {
+				books[i].Price = price
+			}
+			if newID, ok := patchData["id"].(string); ok {
+				books[i].ID = newID
+			}
+
+			c.JSON(http.StatusOK, books[i])
+			return
+		}
+	}
+
+	c.JSON(http.StatusNotFound, gin.H{"error": "book not found"})
+}
+
 
 func main() {
 	router := gin.Default()
@@ -116,6 +151,8 @@ func main() {
 	router.POST("/books", createBook)
 	router.PUT("/books/:id", updateBook)
 	router.DELETE("/books/:id", deleteBook)
+	router.PATCH("/books/:id", patchBook)
+
 
 	router.Run("localhost:8080")
 }
